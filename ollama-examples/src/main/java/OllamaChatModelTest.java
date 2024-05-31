@@ -21,11 +21,11 @@ class OllamaChatModelTest {
      * 2. Run "docker exec -it ollama ollama run mistral" <- specify the desired model here
      */
 
-    static String MODEL_NAME = "orca-mini"; // try "mistral", "llama2", "codellama", "phi" or "tinyllama"
+    static String MODEL_NAME = "llama3"; // try "mistral", "llama2", "codellama", "phi" or "tinyllama"
 
-    @Container
-    static GenericContainer<?> ollama = new GenericContainer<>("langchain4j/ollama-" + MODEL_NAME + ":latest")
-            .withExposedPorts(11434);
+//    @Container
+//    static GenericContainer<?> ollama = new GenericContainer<>("langchain4j/ollama-" + MODEL_NAME + ":latest")
+//            .withExposedPorts(11434);
 
     @Test
     void simple_example() {
@@ -55,6 +55,7 @@ class OllamaChatModelTest {
     }
 
     static String baseUrl() {
-        return String.format("http://%s:%d", ollama.getHost(), ollama.getFirstMappedPort());
+//        return String.format("http://%s:%d", ollama.getHost(), ollama.getFirstMappedPort());
+        return "http://10.20.31.22:11434";
     }
 }

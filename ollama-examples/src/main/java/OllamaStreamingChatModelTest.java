@@ -26,19 +26,19 @@ class OllamaStreamingChatModelTest {
      * 2. Run "docker exec -it ollama ollama run llama2" <- specify the desired model here
      */
 
-    static String MODEL_NAME = "orca-mini"; // try "mistral", "llama2", "codellama" or "phi"
+    static String MODEL_NAME = "llama3"; // try "mistral", "llama2", "codellama" or "phi"
     static String DOCKER_IMAGE_NAME = "langchain4j/ollama-" + MODEL_NAME + ":latest";
     static Integer PORT = 11434;
 
-    @Container
-    static GenericContainer<?> ollama = new GenericContainer<>(DOCKER_IMAGE_NAME)
-            .withExposedPorts(PORT);
+//    @Container
+//    static GenericContainer<?> ollama = new GenericContainer<>(DOCKER_IMAGE_NAME)
+//            .withExposedPorts(PORT);
 
     @Test
     void streaming_example() {
 
         StreamingChatLanguageModel model = OllamaStreamingChatModel.builder()
-                .baseUrl(String.format("http://%s:%d", ollama.getHost(), ollama.getMappedPort(PORT)))
+                .baseUrl("http://10.20.31.22:11434")
                 .modelName(MODEL_NAME)
                 .temperature(0.0)
                 .build();
